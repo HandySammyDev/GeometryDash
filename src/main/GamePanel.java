@@ -23,12 +23,15 @@ public class GamePanel extends JPanel implements Runnable {
     int playerX = 100;
     int playerY = 100;
     int playerSpeed = 4;
-    int playerJump = 20;
+    boolean playerRotateForward;
+    boolean playerRotateBackward;
+    //int playerJump = 20;
 
     //Key inputs
     KeyHandler keyHandler = new KeyHandler();
 
     Thread gameThread;
+    PlayManager pm;
 
     GamePanel(){
 
@@ -76,10 +79,16 @@ public class GamePanel extends JPanel implements Runnable {
 
         //Key inputs
         if(keyHandler.upPressed){
-            playerY -= playerJump;
+            playerY -= playerSpeed;
         }
         if(keyHandler.downPressed){
             playerY += playerSpeed;
+        }
+        if(keyHandler.leftPressed){
+            playerRotateForward = false; //reset
+        }
+        if(keyHandler.rightPressed){
+            playerRotateBackward = false; //reset
         }
     }
     public void paintComponent(Graphics g){
@@ -88,6 +97,9 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.white);
         g2.fillRect(playerX, playerY, tileSize, tileSize);
+
+        pm.draw();
+
         g2.dispose();
     }
 }
