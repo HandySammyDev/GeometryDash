@@ -2,6 +2,8 @@ package main;
 
 import block.PlayerSqr;
 
+import java.awt.*;
+
 public class PlayManager {
 
     //Main Play Area
@@ -13,7 +15,7 @@ public class PlayManager {
     public static int bottom_y = 720;
 
     //Mino
-    PlayerSqr ps;
+    PlayerSqr ps = new PlayerSqr(Color.green);
     final int SQR_START_X;
     final int SQR_START_Y;
 
@@ -27,9 +29,13 @@ public class PlayManager {
         //Start X will be around the left side of the play area
         SQR_START_X = left_x + 100;
         SQR_START_Y = top_y + (bottom_y/2);
+
+        //Set the starting sqr
+        ps.setXY(SQR_START_X,SQR_START_Y);
+
     }
 
-    public void draw(){
+    public void draw(Graphics2D g2){
 
     }
 }

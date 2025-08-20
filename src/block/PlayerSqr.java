@@ -2,7 +2,9 @@ package block;
 
 import java.awt.*;
 
-public class PlayerSqr {
+public class PlayerSqr extends Square {
 
-    public Block b = new Block(Color.green);
+    public PlayerSqr(Color c) {
+        super(c);
+    }
 }

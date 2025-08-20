@@ -2,7 +2,6 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -98,7 +97,7 @@ public class GamePanel extends JPanel implements Runnable {
         g2.setColor(Color.white);
         g2.fillRect(playerX, playerY, tileSize, tileSize);
 
-        pm.draw();
+        pm.draw(g2);
 
         g2.dispose();
     }
