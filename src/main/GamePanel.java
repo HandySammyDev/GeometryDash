@@ -39,11 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.black);
         this.setLayout(null);
 
-        //Implement KeyListner
+        //Implement KeyListener
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
-
-        //pm = new PlayManager
     }
 
     public void startGameThread(){
@@ -90,15 +88,15 @@ public class GamePanel extends JPanel implements Runnable {
             playerRotateBackward = false; //reset
         }
     }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.white);
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+//        g2.fillRect(playerX, playerY, tileSize, tileSize);
 
         pm.draw(g2);
 
-        g2.dispose();
+        //g2.dispose();
     }
 }
