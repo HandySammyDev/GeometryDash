@@ -7,30 +7,22 @@ public class GamePanel extends JPanel implements Runnable {
 
     //Screen settings
     final int originalTileSize = 16; //16x16 tile
-    final int scale = 5;
-    final int tileSize = originalTileSize * scale; //80x80 tile
+    final int scale = 4;
+    final int tileSize = originalTileSize * scale; //64x64 tile
 
     //Ratio 16x9 (1280x720)
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 9;
-    final int screenWidth = tileSize * maxScreenCol; //1280
-    final int screenHeight = tileSize * maxScreenRow; //720
+    final int screenTileCol = 11;
+    final int screenTileRow = 18;
+    final int screenHeight = tileSize * screenTileCol; //720
+    final int screenWidth = tileSize * screenTileRow; //1280
 
     final int FPS = 60;
-
-    //Set player's default positions
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
-    boolean playerRotateForward;
-    boolean playerRotateBackward;
-    //int playerJump = 20;
 
     //Key inputs
     KeyHandler keyHandler = new KeyHandler();
 
     Thread gameThread;
-    PlayManager pm;
+    PlayManager pm = new PlayManager();
 
     GamePanel(){
 
@@ -60,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         while(gameThread != null){
 
+
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
@@ -73,30 +66,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-
-        //Key inputs
-        if(keyHandler.upPressed){
-            playerY -= playerSpeed;
-        }
-        if(keyHandler.downPressed){
-            playerY += playerSpeed;
-        }
-        if(keyHandler.leftPressed){
-            playerRotateForward = false; //reset
-        }
-        if(keyHandler.rightPressed){
-            playerRotateBackward = false; //reset
-        }
+        pm.update();
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-//        g2.fillRect(playerX, playerY, tileSize, tileSize);
 
         pm.draw(g2);
-
-        //g2.dispose();
     }
 }
