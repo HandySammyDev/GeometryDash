@@ -1,6 +1,8 @@
 package block;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
 import main.KeyHandler;
 
 public class Square extends Rectangle {
@@ -9,14 +11,17 @@ public class Square extends Rectangle {
     public static final int SIZE = 64; // 30x30 block(might need to change to 80x80)
     public int speed = 7;
     public int jump = 10;
-    public Color c;
+    public Color color;
 
     public boolean leftCollision, rightCollision, bottomCollision; //might not need left collision
     public boolean isJump, isRotation;
     public boolean isDead;
 
-    public Square(Color c){
-        this.c = c;
+    Graphics2D g2D;
+    Rectangle2D.Double r = new Rectangle2D.Double(x,y,SIZE,SIZE);
+
+    public Square(Color color){
+        this.color = color;
     }
 
     public void setXY(int x, int y){
@@ -27,7 +32,25 @@ public class Square extends Rectangle {
         x += speed;
     }
     public void rotation(){
-        
+
+        g2D.setColor(color);
+        g2D.rotate(Math.toRadians(0));
+        g2D.fill(r);
+
+        int X = x+width;
+        int Y = y+height;
+        int round = 1;
+
+        int i = 0;
+        while(KeyHandler.spacePressed){
+
+            while(i<90){
+
+                g2D.translate(x,y);
+                g2D.rotate(Math.toRadians(i), X, Y);  // rotate around the bottom-right corner of the rectangle
+            }
+        }
+
     }
     public void jump(){
 
@@ -38,11 +61,15 @@ public class Square extends Rectangle {
 
     public void update(){
 
+        rotation();
         moves();
     }
 
     public void draw(Graphics2D g2){
-        g2.setColor(c);
-        g2.fillRect(x, y, SIZE,SIZE);
+
+        this.g2D = g2;
+
+        g2D.setColor(color);
+        g2D.fillRect(x, y, SIZE,SIZE);
     }
 }
