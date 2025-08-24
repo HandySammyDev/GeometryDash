@@ -9,6 +9,7 @@ public class KeyHandler implements KeyListener {
     public static boolean downPressed;
     public static boolean leftPressed;
     public static boolean rightPressed;
+    public static boolean spacePressed;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -32,6 +33,9 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_RIGHT){
             rightPressed = true;
         }
+        if(code == KeyEvent.VK_SPACE){
+            spacePressed = true;
+        }
     }
 
     @Override
@@ -50,6 +54,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_RIGHT){
             rightPressed = false;
+        }
+        if(code == KeyEvent.VK_SPACE){
+            spacePressed = false;
         }
     }
 }
