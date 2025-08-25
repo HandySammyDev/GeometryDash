@@ -8,18 +8,18 @@ public class GamePanel extends JPanel implements Runnable {
     //Screen settings
     final int originalBlockSize = 16; //16x16 tile
     final int scale = 4;
-    final int blockSize = originalBlockSize * scale; //64x64 tile
+    public final int blockSize = originalBlockSize * scale; //64x64 tile
 
     //Ratio 16x9 (1280x720)
     public final int screenBlockCol = 11;
     public final int screenBlockRow = 18;
-    final int screenHeight = blockSize * screenBlockCol; //720
-    final int screenWidth = blockSize * screenBlockRow; //1280
+    public final int screenHeight = blockSize * screenBlockCol; //720
+    public final int screenWidth = blockSize * screenBlockRow; //1280
 
-    final int FPS = 60;
+    public final int FPS = 60;
 
     //Key inputs
-    KeyHandler keyHandler = new KeyHandler();
+    public KeyHandler keyHandler = new KeyHandler();
 
     Thread gameThread;
     PlayManager pm = new PlayManager();

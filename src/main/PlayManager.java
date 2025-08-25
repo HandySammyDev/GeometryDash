@@ -1,13 +1,17 @@
 package main;
 
-import square.Square;
+import square.Player;
 
 import java.awt.*;
 
 public class PlayManager {
 
-    //Mino
-    Square playerS = new Square(Color.green);
+    //Class
+    GamePanel gp;
+    KeyHandler keyH;
+
+    //Player Square
+    public Player playerS = new Player(gp, keyH, Color.green);
     final int SQR_START_X;
     final int SQR_START_Y;
 
