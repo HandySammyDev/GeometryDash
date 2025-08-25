@@ -6,15 +6,15 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable {
 
     //Screen settings
-    final int originalTileSize = 16; //16x16 tile
+    final int originalBlockSize = 16; //16x16 tile
     final int scale = 4;
-    final int tileSize = originalTileSize * scale; //64x64 tile
+    final int blockSize = originalBlockSize * scale; //64x64 tile
 
     //Ratio 16x9 (1280x720)
-    final int screenTileCol = 11;
-    final int screenTileRow = 18;
-    final int screenHeight = tileSize * screenTileCol; //720
-    final int screenWidth = tileSize * screenTileRow; //1280
+    public final int screenBlockCol = 11;
+    public final int screenBlockRow = 18;
+    final int screenHeight = blockSize * screenBlockCol; //720
+    final int screenWidth = blockSize * screenBlockRow; //1280
 
     final int FPS = 60;
 
