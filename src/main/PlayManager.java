@@ -1,5 +1,7 @@
 package main;
 
+import block.Block;
+import block.BlockManager;
 import square.Player;
 
 import java.awt.*;
@@ -7,11 +9,11 @@ import java.awt.*;
 public class PlayManager {
 
     //Class
-    GamePanel gp;
-    KeyHandler keyH;
+    KeyHandler keyH = new KeyHandler();
+    BlockManager bm = new BlockManager(this);
 
     //Player Square
-    public Player playerS = new Player(gp, keyH, Color.green);
+    public Player playerS = new Player(keyH, Color.green);
     final int SQR_START_X;
     final int SQR_START_Y;
 
@@ -36,6 +38,8 @@ public class PlayManager {
     }
 
     public void draw(Graphics2D g2){
+
+        bm.draw(g2);
         playerS.draw(g2);
     }
 }

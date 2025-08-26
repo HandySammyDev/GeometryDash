@@ -7,19 +7,17 @@ import java.awt.*;
 
 public class Player extends Square{
 
-    GamePanel gp;
     KeyHandler keyH;
 
     public final int screenX;
     public final int screenY;
 
-    public Player(GamePanel gp, KeyHandler keyH, Color color){
+    public Player(KeyHandler keyH, Color color){
         this.color = color;
-        this.gp = gp;
         this.keyH = keyH;
 
-        screenX = gp.screenWidth/2 - (gp.blockSize/2);
-        screenY = gp.screenHeight/2 - (gp.blockSize/2);
+        screenX = GamePanel.screenWidth/2 - (GamePanel.blockSize/2);
+        screenY = GamePanel.screenHeight/2 - (GamePanel.blockSize/2);
 
         setDefaultValues();
     }

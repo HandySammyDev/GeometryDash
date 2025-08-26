@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Block extends Rectangle {
 
-    private Color color;
+    public Color color;
     public final int SIZE = 64;
     public boolean collision = false;
 

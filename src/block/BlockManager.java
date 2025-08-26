@@ -4,24 +4,22 @@ import main.GamePanel;
 import main.PlayManager;
 
 import java.awt.*;
-import java.awt.image.TileObserver;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class BlockManager {
 
-    GamePanel gp;
     PlayManager pm;
     Block[] block;
     int mapBlockNumber[][];
 
-    public BlockManager(GamePanel gp, PlayManager pm){
+    public BlockManager(PlayManager pm){
 
-        this.gp = gp;
+        this.pm = pm;
 
         block = new Block[10];
-        mapBlockNumber = new int[gp.screenBlockCol][gp.screenBlockRow];
+        mapBlockNumber = new int[GamePanel.screenBlockCol][GamePanel.screenBlockRow];
 
         getBlockColor();
         loadMap("/maps/mapDemo1.txt");
@@ -42,11 +40,11 @@ public class BlockManager {
             int col = 0;
             int row = 0;
 
-            while (col < gp.screenBlockCol && row < gp.screenBlockRow) {
+            while (col < GamePanel.screenBlockCol && row < GamePanel.screenBlockRow) {
 
                 String line = br.readLine();
 
-                while(col < gp.screenBlockRow){
+                while(col < GamePanel.screenBlockRow){
 
                     String numbers[] = line.split( " ");
 
@@ -55,7 +53,7 @@ public class BlockManager {
                     mapBlockNumber[col][row] = num;
                     col++;
                 }
-                if(col == gp.screenBlockCol){
+                if(col == GamePanel.screenBlockCol){
                     col = 0;
                     row++;
                 }
@@ -72,9 +70,9 @@ public class BlockManager {
         int worldCol = 0;
         int worldRow = 0;
 
-        while(worldCol < gp.screenBlockCol && worldRow < gp.screenBlockRow){
+        while(worldCol < GamePanel.screenBlockCol && worldRow < GamePanel.screenBlockRow){
 
-            int blockSize = gp.blockSize;
+            int blockSize = GamePanel.blockSize;
             int blockNumber = mapBlockNumber[worldCol][worldRow];
 
             int worldX = worldCol * blockSize; //64
@@ -89,12 +87,13 @@ public class BlockManager {
                worldY + blockSize > pm.playerS.worldY - pm.playerS.screenY &&
                worldY - blockSize < pm.playerS.worldY + pm.playerS.screenY){
 
-                g2.drawRect(block[blockNumber], screenX, screenY, blockSize, blockSize, null);
+                g2.setColor(block[blockNumber].color);
+                g2.fillRect(screenX, screenY, blockSize, blockSize);
             }
 
             worldCol++;
 
-            if(worldCol == gp.screenBlockCol){
+            if(worldCol == GamePanel.screenBlockCol){
                 worldCol = 0;
                 worldRow++;
             }
