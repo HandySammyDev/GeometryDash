@@ -5,6 +5,7 @@ import java.awt.*;
 public class Square extends Rectangle{
 
     public int worldX, worldY;
+    public int playerX, playerY;
     public int SIZE;
     public int speed;
     public int jump;
@@ -18,18 +19,6 @@ public class Square extends Rectangle{
     public boolean isDead;
 
     public void setXY(int x, int y){
-
-    }
-    public void moves(){
-
-    }
-    public void rotation(){
-
-    }
-    public void jump(){
-
-    }
-    public void collision(){
 
     }
 }

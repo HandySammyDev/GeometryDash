@@ -23,8 +23,8 @@ public class Player extends Square{
     }
 
     public void setXY(int x, int y){
-        this.worldX = x;
-        this.worldY = y;
+        this.playerX = x;
+        this.playerY = y;
     }
     public void setDefaultValues(){
         this.SIZE = 64;
@@ -43,10 +43,10 @@ public class Player extends Square{
         this.isRotation = false;
         this.isDead = false;
     }
-
-    public void update(){
-        rotateSpeed++;
-        moves();
+    public void moves(){
+        playerX += 2;
+    }
+    public void rotation(){
         if(rotateSpeed > 20){
 
             rotationRadians += 5;
@@ -57,6 +57,18 @@ public class Player extends Square{
             rotateSpeed = 0;
         }
     }
+    public void jump(){
+
+    }
+    public void collision(){
+
+    }
+
+    public void update(){
+        rotateSpeed++;
+        moves();
+        rotation();
+    }
 
     public void draw(Graphics2D g2){
 
@@ -64,7 +76,7 @@ public class Player extends Square{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Moves the origin to the center of the square
-        g2.translate(x,y); //100, 400
+        g2.translate(playerX,playerY); //100, 450
 
         // Rotates around the new origin
         g2.rotate(rotationRadians);
