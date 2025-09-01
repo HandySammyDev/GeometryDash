@@ -11,10 +11,10 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int blockSize = originalBlockSize * scale; //64x64 tile
 
     //Ratio 16x9 (1280x720)
-    public static final int screenBlockCol = 11;
-    public static final int screenBlockRow = 18;
-    public static final int screenHeight = blockSize * screenBlockCol; //720
-    public static final int screenWidth = blockSize * screenBlockRow; //1280
+    public static final int screenBlockCol = 20;
+    public static final int screenBlockRow = 11;
+    public static final int screenHeight = blockSize * screenBlockRow; //720
+    public static final int screenWidth = blockSize * screenBlockCol; //1280
 
     public final int FPS = 60;
 

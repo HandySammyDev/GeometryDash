@@ -13,14 +13,13 @@ public class BlockManager {
     PlayManager pm;
     Block[] block;
     int[][] mapBlockNumber;
-    boolean stopRender = false;
 
     public BlockManager(PlayManager pm){
 
         this.pm = pm;
 
         block = new Block[10];
-        mapBlockNumber = new int[GamePanel.screenBlockCol][GamePanel.screenBlockRow];
+        mapBlockNumber = new int[GamePanel.screenBlockRow][GamePanel.screenBlockCol];
 
         getBlockColor();
         loadMap("/maps/mapDemo1.txt");
@@ -38,19 +37,27 @@ public class BlockManager {
             InputStream is = getClass().getResourceAsStream(mapFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            int row = 0;
             int col = 0;
+            int row = 0;
 
             while(row < GamePanel.screenBlockRow && col < GamePanel.screenBlockCol){
 
                 String line = br.readLine(); //0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 
-                while(row < GamePanel.screenBlockRow){
+                while(col < GamePanel.screenBlockCol){
 
-                    String[] numbers = line.split(" ");
+                    String[] numbers = line.split(" "); //separates all the numbers by using spaces and puts em in a array
 
-                    mapBlockNumber = new int[row][col];
-                    //Wrong btw
+                    int number = Integer.parseInt(numbers[col]);
+
+                    mapBlockNumber[row][col] = number;
+
+                    col++;
+                }
+
+                if(col == GamePanel.screenBlockCol){
+                    row++;
+                    col = 0;
                 }
             }
 
@@ -60,6 +67,7 @@ public class BlockManager {
 
         }
     }
+
     // Draw blocks
     public void draw(Graphics2D g2){
 
@@ -71,8 +79,10 @@ public class BlockManager {
 
         while(worldCol < GamePanel.screenBlockCol && worldRow < GamePanel.screenBlockRow){
 
-            block[0].setXY(x,y);
-            block[0].draw(g2);
+            int blockType = mapBlockNumber[worldRow][worldCol];
+
+            block[blockType].setXY(x,y);
+            block[blockType].draw(g2);
 
             x += blockSize;
             worldRow++;
