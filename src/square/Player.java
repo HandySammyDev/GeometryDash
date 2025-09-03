@@ -7,14 +7,11 @@ import java.awt.*;
 
 public class Player extends Square{
 
-    KeyHandler keyH;
-
     public final int screenX;
     public final int screenY;
 
     public Player(KeyHandler keyH, Color color){
         this.color = color;
-        this.keyH = keyH;
 
         screenX = GamePanel.screenWidth/2 - (GamePanel.blockSize/2);
         screenY = GamePanel.screenHeight/2 - (GamePanel.blockSize/2);
@@ -47,27 +44,44 @@ public class Player extends Square{
         playerX += 2;
     }
     public void rotation(){
+        rotateSpeed++;
+
         if(rotateSpeed > 20){
 
             rotationRadians += 5;
 
             if(rotationRadians==90){
                 rotationRadians = 0;
+                finishedRotate = false;
             }
             rotateSpeed = 0;
         }
     }
-    public void jump(){
 
+    int timer = 0;
+    boolean fullJump = false;
+    int YBeforeJump;
+    public void jump(){
+        timer++;
+
+        if(!(timer > 20) || !fullJump){
+            if(KeyHandler.spacePressed && YBeforeJump < playerX+100){
+                playerY -= 5;
+            }
+            else{
+                playerY += 5;
+            }
+        }
     }
     public void collision(){
 
     }
 
+    private boolean finishedRotate = true;
     public void update(){
-        rotateSpeed++;
+
         moves();
-        rotation();
+        jump();
     }
 
     public void draw(Graphics2D g2){
@@ -79,7 +93,7 @@ public class Player extends Square{
         g2.translate(playerX,playerY); //100, 450
 
         // Rotates around the new origin
-        g2.rotate(rotationRadians);
+//        g2.rotate(rotationRadians);
 
         // Draw sqr centered at (0,0)
         g2.setColor(color);
