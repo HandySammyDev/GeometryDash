@@ -12,7 +12,7 @@ public class BlockManager {
     Block[] block;
     int[][] mapBlockNumber;
     private int rows = GamePanel.screenBlockRow;
-    private int cols = GamePanel.screenBlockCol;
+    private int cols = GamePanel.screenBlockCol * 2; // ERROR PRONE: Since we added double cols to the map
 
     public BlockManager(PlayManager pm){
 
@@ -56,18 +56,44 @@ public class BlockManager {
     // Draw blocks
     public void draw(Graphics2D g2){
 
-        int blockSize = 64;
+        int blockSize = GamePanel.blockSize; //Change this to gp.blockSize
 
-        for(int row = 0; row < rows; row++){
-            for(int col = 0; col < cols; col++){
+        for(int worldRow = 0; worldRow < rows; worldRow++){
+            for(int worldCol = 0; worldCol < cols; worldCol++){
 
-                int blockType = mapBlockNumber[row][col];
-                int x = col * blockSize;
-                int y = row * blockSize;
+                int blockType = mapBlockNumber[worldRow][worldCol];
 
-                block[blockType].setXY(x,y);
-                block[blockType].draw(g2);
+                int worldX = worldCol * blockSize;
+                int worldY = worldRow * blockSize;
+                int screenX = worldX - pm.playerS.playerX + pm.playerS.screenX;
+                int screenY = worldY - pm.playerS.playerY + pm.playerS.screenY;
+
+                //Helps with performance
+                if(worldX + blockSize > pm.playerS.playerX - pm.playerS.screenX &&
+                        worldX - blockSize < pm.playerS.playerX + pm.playerS.screenX &&
+                        worldY + blockSize > pm.playerS.playerY - pm.playerS.screenY &&
+                        worldY - blockSize < pm.playerS.playerY + pm.playerS.screenY) {
+
+                    block[blockType].setXY(screenX, screenY);
+                    block[blockType].draw(g2);
+                }
             }
         }
     }
+//    public void draw(Graphics2D g2){
+//
+//        int blockSize = 64;
+//
+//        for(int row = 0; row < rows; row++){
+//            for(int col = 0; col < cols; col++){
+//
+//                int blockType = mapBlockNumber[row][col];
+//                int x = col * blockSize;
+//                int y = row * blockSize;
+//
+//                block[blockType].setXY(x,y);
+//                block[blockType].draw(g2);
+//            }
+//        }
+//    }
 }

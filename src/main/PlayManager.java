@@ -1,6 +1,5 @@
 package main;
 
-import block.Block;
 import block.BlockManager;
 import square.Player;
 
