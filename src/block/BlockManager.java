@@ -63,10 +63,10 @@ public class BlockManager {
 
                 int blockType = mapBlockNumber[worldRow][worldCol];
 
-                int worldX = worldCol * blockSize;
-                int worldY = worldRow * blockSize;
-                int screenX = worldX - pm.playerS.playerX + pm.playerS.screenX;
-                int screenY = worldY - pm.playerS.playerY + pm.playerS.screenY;
+                int worldX = worldCol * blockSize; // 0 * 64
+                int worldY = worldRow * blockSize; // 0 * 64
+                int screenX = worldX - pm.playerS.playerX + pm.playerS.screenX; // 0 - 0 + 608 = 608
+                int screenY = worldY - pm.playerS.playerY + pm.playerS.screenY; // 500 + 328   = 828
 
                 //Helps with performance
                 if(worldX + blockSize > pm.playerS.playerX - pm.playerS.screenX &&
@@ -80,20 +80,4 @@ public class BlockManager {
             }
         }
     }
-//    public void draw(Graphics2D g2){
-//
-//        int blockSize = 64;
-//
-//        for(int row = 0; row < rows; row++){
-//            for(int col = 0; col < cols; col++){
-//
-//                int blockType = mapBlockNumber[row][col];
-//                int x = col * blockSize;
-//                int y = row * blockSize;
-//
-//                block[blockType].setXY(x,y);
-//                block[blockType].draw(g2);
-//            }
-//        }
-//    }
 }

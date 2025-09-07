@@ -10,11 +10,14 @@ public class Player extends Square{
     public final int screenX;
     public final int screenY;
 
+    //Pause
+    private boolean pause = false;
+
     public Player(KeyHandler keyH, Color color){
         this.color = color;
 
-        screenX = GamePanel.screenWidth/2 - (GamePanel.blockSize/2);
-        screenY = GamePanel.screenHeight/2 - (GamePanel.blockSize/2);
+        screenX = GamePanel.screenWidth/2 - (GamePanel.blockSize/2);  // 1280/2 - (64/2) = 608
+        screenY = GamePanel.screenHeight/2 - (GamePanel.blockSize/2); // 720/2  - (64/2) = 328
 
         setDefaultValues();
     }
@@ -41,7 +44,9 @@ public class Player extends Square{
         this.isDead = false;
     }
     public void moves(){
-        playerX += 2;
+        if(KeyHandler.pausePressed){
+            playerX += 2;
+        }
     }
     public void rotation(){
         rotateSpeed++;
@@ -58,22 +63,18 @@ public class Player extends Square{
         }
     }
 
-    int timer = 0;
-    boolean fullJump = false;
-    int YBeforeJump;
     public void jump(){
-        timer++;
-
-        if(!(timer > 20) || !fullJump){
-            if(KeyHandler.spacePressed && YBeforeJump < playerX+100){
-                playerY -= 5;
-            }
-            else{
-                playerY += 5;
-            }
+        if(KeyHandler.spacePressed){
+            playerY -= 5;
+        }
+        else{
+            playerY += 5;
         }
     }
     public void collision(){
+
+    }
+    public void pauseGame(){
 
     }
 
@@ -81,7 +82,7 @@ public class Player extends Square{
     public void update(){
 
         moves();
-        jump();
+        //jump();
     }
 
     public void draw(Graphics2D g2){
