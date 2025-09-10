@@ -63,20 +63,26 @@ public class BlockManager {
 
                 int blockType = mapBlockNumber[worldRow][worldCol];
 
+                int playerScreenX = 500;
+                int playerScreenY = 450;
+
                 int worldX = worldCol * blockSize; // 0 * 64
                 int worldY = worldRow * blockSize; // 0 * 64
-                int screenX = worldX - pm.playerS.playerX + pm.playerS.screenX; // 0 - 0 + 608 = 608
-                int screenY = worldY - pm.playerS.playerY + pm.playerS.screenY; // 500 + 328   = 828
+                int screenX = worldX - pm.playerS.playerX + playerScreenX;
+                int screenY = worldY - pm.playerS.playerY + playerScreenY;
+
+                block[blockType].setXY(screenX, screenY);
+                block[blockType].draw(g2);
 
                 //Helps with performance
-                if(worldX + blockSize > pm.playerS.playerX - pm.playerS.screenX &&
-                        worldX - blockSize < pm.playerS.playerX + pm.playerS.screenX &&
-                        worldY + blockSize > pm.playerS.playerY - pm.playerS.screenY &&
-                        worldY - blockSize < pm.playerS.playerY + pm.playerS.screenY) {
-
-                    block[blockType].setXY(screenX, screenY);
-                    block[blockType].draw(g2);
-                }
+//                if(worldX + blockSize > pm.playerS.playerX - pm.playerS.screenX &&
+//                        worldX - blockSize < pm.playerS.playerX + pm.playerS.screenX &&
+//                        worldY + blockSize > pm.playerS.playerY - pm.playerS.screenY &&
+//                        worldY - blockSize < pm.playerS.playerY + pm.playerS.screenY) {
+//
+//                    block[blockType].setXY(screenX, screenY);
+//                    block[blockType].draw(g2);
+//                }
             }
         }
     }
